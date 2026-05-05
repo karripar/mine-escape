@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://20wufoowd3ja"]
+
+[ext_resource type="Script" uid="uid://ch3k4ffw1wwfy" path="res://scripts/hint_trigger.gd" id="1_h28sa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cfeyv"]
+
+[node name="HintTrigger" type="Area2D" unique_id=2108901362]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_h28sa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1406296882]
+shape = SubResource("RectangleShape2D_cfeyv")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
