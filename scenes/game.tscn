@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://b7bkbd0vtvyv8" path="res://scenes/goal_zone.tscn" id="12_kvuet"]
 [ext_resource type="PackedScene" uid="uid://20wufoowd3ja" path="res://scenes/hint_trigger.tscn" id="13_trtic"]
 [ext_resource type="AudioStream" uid="uid://7pf774ymy5ja" path="res://assets/music/jorisvermeer-creepy-game-background-397275.mp3" id="14_trtic"]
+[ext_resource type="PackedScene" uid="uid://d3supwlwig157" path="res://scenes/slime_enemy.tscn" id="15_ir15t"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_dinhu"]
 font = ExtResource("2_kvpfn")
@@ -405,20 +406,6 @@ _data = {
 &"activate": SubResource("Animation_kvpfn")
 }
 
-[sub_resource type="GDScript" id="GDScript_p57ef"]
-script/source = "extends Area2D
-@onready var timer: Timer = $Timer
-
-func _on_body_entered(body):
-	Engine.time_scale = 0.5
-	body.get_node(\"CollisionShape2D\").queue_free()
-	timer.start()
-
-func _on_timer_timeout() -> void:
-	Engine.time_scale = 1.0
-	get_tree().reload_current_scene()
-"
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u5sy4"]
 size = Vector2(47, 5)
 
@@ -433,6 +420,10 @@ fill = 1
 fill_from = Vector2(0.510989, 0.521978)
 
 [node name="Game" type="Node2D" unique_id=775954886]
+
+[node name="GameManager" type="Node" parent="." unique_id=174504455]
+unique_name_in_owner = true
+script = ExtResource("1_gee14")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=320526613]
 unique_name_in_owner = true
@@ -475,10 +466,6 @@ vertical_alignment = 1
 [node name="HintTrigger" parent="CanvasLayer/HintControl" unique_id=2108901362 instance=ExtResource("13_trtic")]
 position = Vector2(-571, 102)
 hint_text = "Something lurks in the depths..."
-
-[node name="GameManager" type="Node" parent="." unique_id=174504455]
-unique_name_in_owner = true
-script = ExtResource("1_gee14")
 
 [node name="TileMap" type="TileMap" parent="." unique_id=1794861574]
 material = SubResource("CanvasItemMaterial_p57ef")
@@ -531,7 +518,6 @@ libraries/ = SubResource("AnimationLibrary_dinhu")
 
 [node name="Killzone" parent="LavaKillzones" unique_id=29465303 instance=ExtResource("6_p57ef")]
 position = Vector2(108, 43)
-script = SubResource("GDScript_p57ef")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LavaKillzones/Killzone" unique_id=1740697282]
 position = Vector2(-5, 41)
@@ -539,7 +525,6 @@ shape = SubResource("RectangleShape2D_u5sy4")
 
 [node name="Killzone2" parent="LavaKillzones" unique_id=371395539 instance=ExtResource("6_p57ef")]
 position = Vector2(108, 43)
-script = SubResource("GDScript_p57ef")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LavaKillzones/Killzone2" unique_id=1492926584]
 position = Vector2(203, 76)
@@ -547,7 +532,6 @@ shape = SubResource("RectangleShape2D_u5sy4")
 
 [node name="Killzone3" parent="LavaKillzones" unique_id=2053613679 instance=ExtResource("6_p57ef")]
 position = Vector2(108, 43)
-script = SubResource("GDScript_p57ef")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LavaKillzones/Killzone3" unique_id=463913710]
 position = Vector2(251, 76)
@@ -555,7 +539,6 @@ shape = SubResource("RectangleShape2D_u5sy4")
 
 [node name="Killzone4" parent="LavaKillzones" unique_id=424173251 instance=ExtResource("6_p57ef")]
 position = Vector2(108, 43)
-script = SubResource("GDScript_p57ef")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LavaKillzones/Killzone4" unique_id=532159825]
 position = Vector2(299, 76)
@@ -563,7 +546,6 @@ shape = SubResource("RectangleShape2D_u5sy4")
 
 [node name="Killzone5" parent="LavaKillzones" unique_id=1828039896 instance=ExtResource("6_p57ef")]
 position = Vector2(108, 43)
-script = SubResource("GDScript_p57ef")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LavaKillzones/Killzone5" unique_id=1819566717]
 position = Vector2(346, 76)
@@ -571,7 +553,6 @@ shape = SubResource("RectangleShape2D_u5sy4")
 
 [node name="Killzone6" parent="LavaKillzones" unique_id=710609410 instance=ExtResource("6_p57ef")]
 position = Vector2(108, 43)
-script = SubResource("GDScript_p57ef")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LavaKillzones/Killzone6" unique_id=539464559]
 position = Vector2(-422, 12)
@@ -584,36 +565,42 @@ color = Color(6.180691e-05, 6.180692e-05, 6.180691e-05, 1)
 [node name="LavaLighting" type="Node" parent="." unique_id=221983025]
 
 [node name="PointLight2D" type="PointLight2D" parent="LavaLighting" unique_id=674563539]
+visible = false
 position = Vector2(303.5, 175.99998)
 scale = Vector2(0.515625, 1.5749998)
 energy = 1.44
 texture = SubResource("GradientTexture2D_u5sy4")
 
 [node name="PointLight2D2" type="PointLight2D" parent="LavaLighting" unique_id=1367517582]
+visible = false
 position = Vector2(351, 176)
 scale = Vector2(0.515625, 1.5749998)
 energy = 1.44
 texture = SubResource("GradientTexture2D_u5sy4")
 
 [node name="PointLight2D3" type="PointLight2D" parent="LavaLighting" unique_id=168046709]
+visible = false
 position = Vector2(399, 176)
 scale = Vector2(0.515625, 1.5749998)
 energy = 1.44
 texture = SubResource("GradientTexture2D_u5sy4")
 
 [node name="PointLight2D4" type="PointLight2D" parent="LavaLighting" unique_id=1951982948]
+visible = false
 position = Vector2(448, 176)
 scale = Vector2(0.515625, 1.5749998)
 energy = 1.44
 texture = SubResource("GradientTexture2D_u5sy4")
 
 [node name="PointLight2D5" type="PointLight2D" parent="LavaLighting" unique_id=454740898]
+visible = false
 position = Vector2(103.25, 151.50002)
 scale = Vector2(0.7421875, 1.7875001)
 energy = 1.44
 texture = SubResource("GradientTexture2D_u5sy4")
 
 [node name="PointLight2D6" type="PointLight2D" parent="LavaLighting" unique_id=45134998]
+visible = false
 position = Vector2(-313.375, 120.249985)
 scale = Vector2(0.7617187, 1.7937502)
 energy = 1.44
@@ -691,3 +678,32 @@ hint_text = "How unfortunate! Now you're in trouble."
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1492170359]
 stream = ExtResource("14_trtic")
 autoplay = true
+
+[node name="Enemies" type="Node" parent="." unique_id=115439674]
+
+[node name="SlimeEnemy" parent="Enemies" unique_id=1548619996 instance=ExtResource("15_ir15t")]
+position = Vector2(-77, 372)
+
+[node name="SlimeEnemy2" parent="Enemies" unique_id=73166471 instance=ExtResource("15_ir15t")]
+position = Vector2(-260, 372)
+
+[node name="SlimeEnemy3" parent="Enemies" unique_id=1532223984 instance=ExtResource("15_ir15t")]
+position = Vector2(32, 372)
+
+[node name="SlimeEnemy4" parent="Enemies" unique_id=1838564223 instance=ExtResource("15_ir15t")]
+position = Vector2(141, 372)
+
+[node name="SlimeEnemy5" parent="Enemies" unique_id=1934370120 instance=ExtResource("15_ir15t")]
+position = Vector2(500, 84)
+
+[node name="SlimeEnemy6" parent="Enemies" unique_id=1110471872 instance=ExtResource("15_ir15t")]
+position = Vector2(27, -396)
+
+[node name="SlimeEnemy7" parent="Enemies" unique_id=2029264533 instance=ExtResource("15_ir15t")]
+position = Vector2(-9, -91)
+
+[node name="SlimeEnemy8" parent="Enemies" unique_id=627176054 instance=ExtResource("15_ir15t")]
+position = Vector2(-650, -348)
+
+[node name="SlimeEnemy9" parent="Enemies" unique_id=1507639404 instance=ExtResource("15_ir15t")]
+position = Vector2(-466, -348)

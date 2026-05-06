@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://b48tgyxgnxs6u"]
+
+[ext_resource type="Script" uid="uid://cgnf8rl1gdrbu" path="res://scripts/stomp_zone.gd" id="1_y12q7"]
+
+[node name="StompZone" type="Area2D" unique_id=8589755]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_y12q7")
+
+[node name="StompTimer" type="Timer" parent="." unique_id=557610366]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -9,6 +9,19 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 @onready var animated_sprite = $AnimatedSprite2D
 
+var dead = false
+
+func die():
+	if dead:
+		return
+
+	dead = true
+	print("Player died")
+
+	velocity = Vector2.ZERO
+	set_physics_process(false)
+	animated_sprite.play("death") # if you have it
+
 func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
