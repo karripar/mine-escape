@@ -1,5 +1,7 @@
 # Mine Escape v1.0
 
+![Mine Escape Screenshot](img/screenshot.png)
+
 Mine Escape is a 2D platformer made in Godot where you guide a robot through a mine, collect coins, avoid hazards, and reach the goal to clear the level.
 
 Playable build: https://karripar.itch.io/mine-escape-v10
