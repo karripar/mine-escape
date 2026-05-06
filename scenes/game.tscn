@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://o5sejwpvvsyo" path="res://scripts/game_manager.gd" id="1_gee14"]
 [ext_resource type="PackedScene" uid="uid://dscjbrnyg4cnt" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="Script" uid="uid://cyr5iifepnacr" path="res://scripts/canvas_layer.gd" id="2_0tnpc"]
+[ext_resource type="Script" uid="uid://fjw1xc2hqh0i" path="res://scripts/win_canvas.gd" id="2_ir15t"]
 [ext_resource type="FontFile" uid="uid://2f6mvnfp1dvw" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="2_kvpfn"]
 [ext_resource type="Texture2D" uid="uid://bp7j7aab71nqj" path="res://assets/mineset/tileset/1_Mine_Tileset_1_16.png" id="2_lbhrr"]
 [ext_resource type="Texture2D" uid="uid://cludhvxv5c7q8" path="res://assets/sprites/world_tileset.png" id="2_yqjtg"]
@@ -13,8 +14,10 @@
 [ext_resource type="Script" uid="uid://dl8k0c367ho1h" path="res://scripts/goal_platform.gd" id="8_vtaks"]
 [ext_resource type="PackedScene" uid="uid://b7bkbd0vtvyv8" path="res://scenes/goal_zone.tscn" id="12_kvuet"]
 [ext_resource type="PackedScene" uid="uid://20wufoowd3ja" path="res://scenes/hint_trigger.tscn" id="13_trtic"]
-[ext_resource type="AudioStream" uid="uid://7pf774ymy5ja" path="res://assets/music/jorisvermeer-creepy-game-background-397275.mp3" id="14_trtic"]
 [ext_resource type="PackedScene" uid="uid://d3supwlwig157" path="res://scenes/slime_enemy.tscn" id="15_ir15t"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ca42v"]
+font = ExtResource("2_kvpfn")
 
 [sub_resource type="LabelSettings" id="LabelSettings_dinhu"]
 font = ExtResource("2_kvpfn")
@@ -425,6 +428,30 @@ fill_from = Vector2(0.510989, 0.521978)
 unique_name_in_owner = true
 script = ExtResource("1_gee14")
 
+[node name="WinCanvas" type="CanvasLayer" parent="." unique_id=602221650 groups=["ui"]]
+script = ExtResource("2_ir15t")
+
+[node name="ColorRect" type="ColorRect" parent="WinCanvas" unique_id=670826868]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="WinCanvas" unique_id=2057679540]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="WinLabel" type="Label" parent="WinCanvas/CenterContainer" unique_id=1052096791]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_ca42v")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=320526613]
 unique_name_in_owner = true
 script = ExtResource("2_0tnpc")
@@ -674,10 +701,6 @@ hint_text = "Find all the gold before we let you up..."
 [node name="HintTrigger3" parent="HintTriggers" unique_id=857905138 instance=ExtResource("13_trtic")]
 position = Vector2(248, 342)
 hint_text = "How unfortunate! Now you're in trouble."
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1492170359]
-stream = ExtResource("14_trtic")
-autoplay = true
 
 [node name="Enemies" type="Node" parent="." unique_id=115439674]
 
