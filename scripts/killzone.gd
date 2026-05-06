@@ -8,7 +8,6 @@ func _on_body_entered(body: Node2D) -> void:
 
 	var enemy = get_parent()
 
-	# ✅ correct check (NO has_variable)
 	if "dead" in enemy and enemy.dead:
 		return
 

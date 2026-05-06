@@ -10,6 +10,8 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 @onready var animated_sprite = $AnimatedSprite2D
 
+@onready var ui = get_tree().get_first_node_in_group("DeathUI")
+
 var dead = false
 
 # lock player after beating the game
@@ -26,7 +28,9 @@ func die():
 
 	velocity = Vector2.ZERO
 	set_physics_process(false)
-	animated_sprite.play("death") # if you have it
+	animated_sprite.play("death") 
+	
+	ui.show_death()
 
 func _physics_process(delta):
 	

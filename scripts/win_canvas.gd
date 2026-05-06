@@ -12,3 +12,4 @@ func show_win():
 	label.visible = true
 	color_rect.visible = true
 	
+	

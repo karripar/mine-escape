@@ -2,7 +2,7 @@ extends Area2D
 
 @export var hint_text: String = "Press jump to climb!"
 
-@onready var ui = get_tree().get_root().get_node("Game/CanvasLayer")
+@onready var ui = get_tree().get_root().get_node("Game/Canvas/HintCanvas")
 
 func _on_body_entered(body):
 	print("Enter:", body.name)
